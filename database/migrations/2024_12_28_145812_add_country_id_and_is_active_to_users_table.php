@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('country_id')
                 ->nullable()
-                ->constrained();
+                ->constrained()
+                ->nullOnDelete();
 
             $table->boolean('is_active')
                 ->default(true);

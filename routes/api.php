@@ -5,14 +5,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CountryController;
 
-// Authentication routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/user', [AuthController::class, 'user']);
+// Generate Token route
+Route::post('/tokens/create', [AuthController::class, 'login']);
+Route::post('users', [UserController::class, 'store']);
 
 // User CRUD routes
-Route::resource('users', UserController::class);
+Route::get('users', [UserController::class, 'index'])->middleware('auth:sanctum');
+Route::get('users/{user}', [UserController::class, 'show'])->middleware('auth:sanctum');
+Route::put('users/{user}', [UserController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('users/{user}', [UserController::class, 'destroy'])->middleware('auth:sanctum');
 
 // Country CRUD routes
-Route::resource('countries', CountryController::class);
+Route::middleware('auth:sanctum')->resource('countries', CountryController::class);

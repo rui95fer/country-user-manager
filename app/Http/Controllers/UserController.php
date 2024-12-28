@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -27,7 +26,7 @@ class UserController extends Controller
         ]);
     }
 
-    //Store a newly created user in storage
+    // Store a newly created user in storage
     public function store(Request $request)
     {
         // Validate the incoming request data to ensure it meets the required criteria
@@ -35,7 +34,8 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8',
-            'country_id' => 'required|exists:countries,id',
+            'country_id' => 'nullable|exists:countries,id',
+            'is_active' => 'boolean',
         ]);
 
         // Create a new user instance using the validated request data
@@ -71,8 +71,8 @@ class UserController extends Controller
     {
         // Define the validation rules for the request data
         $validatedData = [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $userId,
+            'name' => 'string|max:255',
+            'email' => 'email|unique:users,email,' . $userId,
             'is_active' => 'boolean',
             'country_id' => 'exists:countries,id',
         ];

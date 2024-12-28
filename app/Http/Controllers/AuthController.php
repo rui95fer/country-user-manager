@@ -2,80 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules;
 
 class AuthController extends Controller
 {
-    /**
-     * Handle user registration.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function register(Request $request): JsonResponse
+    // Handle an incoming authentication request.
+    public function login(Request $request)
     {
-        $validationRules = [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'country_id' => 'required|exists:countries,id',
-        ];
+        // Validate the incoming request data to ensure it meets the required criteria
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
-        $validatedData = $request->validate($validationRules);
+        // Create an array of credentials to be used for authentication
+        $credentials = ['email' => $request->email, 'password' => $request->password];
 
-        $newUser = User::create($validatedData);
-
-        return response()->json($newUser, 201);
-    }
-
-    /**
-     * Handle user login.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function login(Request $request): JsonResponse
-    {
-        $credentials = $request->only(['email', 'password']);
-
+        // Attempt to authenticate the user using the provided credentials
         if (Auth::attempt($credentials)) {
-            $currentUser = Auth::user();
-            $token = $currentUser->createToken('API Token')->plainTextToken;
+            // If authentication is successful, retrieve the authenticated user instance
+            $user = Auth::user();
 
+            // Generate a new API token for the authenticated user
+            $token = $user->createToken('API Token')->plainTextToken;
+
+            // Return a JSON response containing the authenticated user data and API token
             return response()->json([
-                'user' => $currentUser,
+                'user' => $user,
                 'token' => $token,
             ]);
         }
 
+        // If authentication fails, return a JSON response with an error message
         return response()->json(['error' => 'Unauthorized'], 401);
-    }
-
-    /**
-     * Handle user logout.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function logout(Request $request): JsonResponse
-    {
-        Auth::user()->tokens()->delete();
-
-        return response()->json(['message' => 'Logged out successfully']);
-    }
-
-    /**
-     * Get the current user.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function user(Request $request): JsonResponse
-    {
-        return response()->json($request->user());
     }
 }
