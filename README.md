@@ -115,7 +115,7 @@ I can share the Postman collection if needed.
   ```
 - **Response**: User registration.
 
-#### Create Token
+#### Create Token (authenticate with email and password)
 - **POST** `/api/tokens/create`
 - **Request Body**:
   ```json
