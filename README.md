@@ -132,20 +132,17 @@ I can share the Postman collection if needed.
 
 #### Get All Users
 - **GET** `/api/users`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Response**: List of all users.
 
 #### Get User by ID
 - **GET** `/api/users/{id}`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Response**: User details.
 
 #### Update User
 - **PUT** `/api/users/{id}`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Request Body** (example):
   ```json
   {
@@ -157,8 +154,7 @@ I can share the Postman collection if needed.
 
 #### Delete User
 - **DELETE** `/api/users/{id}`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Response**: Success message.
 
 ---
@@ -167,20 +163,17 @@ I can share the Postman collection if needed.
 
 #### Get All Countries
 - **GET** `/api/countries`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Response**: List of all countries.
 
 #### Get Country by ID
 - **GET** `/api/countries/{id}`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Response**: Country details.
 
 #### Create Country
 - **POST** `/api/countries`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Request Body**:
   ```json
   {
@@ -191,8 +184,7 @@ I can share the Postman collection if needed.
 
 #### Update Country
 - **PUT** `/api/countries/{id}`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Request Body**:
   ```json
   {
@@ -203,8 +195,7 @@ I can share the Postman collection if needed.
 
 #### Delete Country
 - **DELETE** `/api/countries/{id}`
-- **Headers**:
-    - Authorization: `Bearer <token>`
+- **Authorization**: `Bearer <token>`
 - **Response**: Success message.
 
 ---
