@@ -88,6 +88,16 @@ The API supports authentication, CRUD operations for users and countries.
 
 ---
 
+This project uses Laravel Sanctum for secure token-based authentication.
+
+Seeders are included to add 10 users and 10 countries to the database.
+Just run `php artisan db:seed` to populate the database with these values.
+
+You can use Postman to test the API endpoints.
+I can share the Postman collection if needed.
+
+---
+
 ## API Endpoints
 
 ### Authentication Endpoints (not protected with Laravel Sanctum)
@@ -198,8 +208,3 @@ The API supports authentication, CRUD operations for users and countries.
 - **Response**: Success message.
 
 ---
-
-This project uses Laravel Sanctum for secure token-based authentication.
-
-Seeders are included to add 10 users and 10 countries to the database.
-Just run `php artisan db:seed` to populate the database with these values.
